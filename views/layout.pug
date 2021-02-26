@@ -1,0 +1,61 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        //- meta(property="og:locale" content="en_US")
+        //- meta(property="og:type" content="website")
+        //- meta(property="og:site_name" content="Aman Kumar | Full-Stack Developer")
+        //- meta(property="og:title" content="Aman Kumar | Full-Stack Developer")
+        //- meta(property="og:url" content="amankumar.ga")
+        //- meta(property="og:description" content="A 20-year-old passionate Full-Stack Developer from India.")
+        //- meta(property="og:image" content="https://blog.corp-site.envato.com/cdn-cgi/image/width=1200,quality=95,format=auto/uploads/2020/06/SOC101_Portfolio_Guide.png")
+        //- meta(property="article:publisher" content="amankumar.ga")
+        //- meta(name="twitter:card" content="summary")
+        //- meta(name="twitter:site" content="@amankumar062")
+        //- meta(name="twitter:title" content="Aman Kumar | Full-Stack Developer")
+        //- meta(name="twitter:description" content="A 20-year-old passionate Full-Stack Developer from India.")
+        //- meta(name="twitter:url" content="amankumar.ga")
+        //- meta(name="author" content="Aman Kumar")
+        //- meta(name="description" content="A 20-year-old passionate Full-Stack Developer from India.")
+
+        //- jQuery
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+
+        //- BootStrap CSS
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous")
+
+        //- Fontawesome
+        link(rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css")
+
+        //- CSS
+        link(rel='stylesheet' href='/dist/style.css')
+
+        //- icon
+        link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
+
+        //- BootStrap JS
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous")
+
+        title= `${title || 'Home'} | ${h.siteName}`
+
+    body
+        block header
+
+
+        //- block messages
+        //-     if locals.flashes
+        //-         .inner
+        //-             .flash-messages
+        //-                 - const categories = Object.keys(locals.flashes)
+        //-                 each category in categories
+        //-                     each message in flashes[category]
+        //-                         .flash(class=`flash--${category}`)
+        //-                             p.flash__text!= message
+        //-                             button.flash__remove(onClick="this.parentElement.remove()") &times;
+        .content
+            block content
+
+        block scripts
+            //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+            script(src="/dist/App.bundle.js")
