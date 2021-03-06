@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 require('dotenv').config({ path: 'variables.env' });
 
+
+
 // Connecting to Database and handling any bad connections
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise;

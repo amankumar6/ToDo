@@ -18,11 +18,11 @@ mixin carousel()
                     .row
                         .col.s12 
                             .card-panel.light-blue.center-align
-                                if (h.moment(group[0].dueDate).format("YYYY MMMM DD") === h.moment(Date.now()).format("YYYY MMMM DD"))
+                                if (h.moment(group[0].dueDate).tz("Asia/Kolkata").format("YYYY MMMM DD") === h.moment(Date.now()).tz("Asia/Kolkata").format("YYYY MMMM DD"))
                                     span.white-text= `You have ${leftTask} task Today`
 
-                                else if(h.moment(group[0].dueDate).format("YYYY MMMM DD") <= h.moment(Date.now()).format("YYYY MMMM DD"))
-                                    span.white-text= `You have ${leftTask} left form ${h.moment(group[0].dueDate).format('DD')}.${h.moment(group[0].dueDate).format('MM')}.${h.moment(group[0].dueDate).format('YY')}`
+                                else if(h.moment(group[0].dueDate).tz("Asia/Kolkata").format("YYYY MMMM DD") <= h.moment(Date.now()).tz("Asia/Kolkata").format("YYYY MMMM DD"))
+                                    span.white-text= `You have ${leftTask} left form ${h.moment(group[0].dueDate).tz("Asia/Kolkata").format('DD')}.${h.moment(group[0].dueDate).tz("Asia/Kolkata").format('MM')}.${h.moment(group[0].dueDate).tz("Asia/Kolkata").format('YY')}`
 
                                 else
-                                    span.white-text= `You have ${leftTask} task on ${h.moment(group[0].dueDate).format('DD')}.${h.moment(group[0].dueDate).format('MM')}.${h.moment(group[0].dueDate).format('YY')}`
+                                    span.white-text= `You have ${leftTask} task on ${h.moment(group[0].dueDate).tz("Asia/Kolkata").format('DD')}.${h.moment(group[0].dueDate).tz("Asia/Kolkata").format('MM')}.${h.moment(group[0].dueDate).tz("Asia/Kolkata").format('YY')}`

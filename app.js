@@ -14,19 +14,22 @@ const helpers = require('./helpers');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 const errorHandlers = require('./handlers/errorHandlers');
+// for timezone
+const moment = require('moment-timezone');
+
 require('./handlers/passport');
 
 // creating express app
 const app = express();
 
-Sentry.init({
-    dsn: process.env.DSN,
-    integrations: [
-        new Sentry.Integrations.Http({ tracing: true }),
-        new Tracing.Integrations.Express({ app }),
-    ],
-    tracesSampleRate: 1.0,
-});
+// Sentry.init({
+//     dsn: process.env.DSN,
+//     integrations: [
+//         new Sentry.Integrations.Http({ tracing: true }),
+//         new Tracing.Integrations.Express({ app }),
+//     ],
+//     tracesSampleRate: 1.0,
+// });
 
 // view engine setup
 
@@ -35,8 +38,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // sentry is for error monoitoring
-app.use(Sentry.Handlers.requestHandler());
-app.use(Sentry.Handlers.tracingHandler());
+// app.use(Sentry.Handlers.requestHandler());
+// app.use(Sentry.Handlers.tracingHandler());
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, 'public')));
@@ -89,7 +92,7 @@ app.use((req, res, next) => {
 app.use('/', routes);
 
 // error monoitoring
-app.use(Sentry.Handlers.errorHandler());
+// app.use(Sentry.Handlers.errorHandler());
 
 // if above routes didn't work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);

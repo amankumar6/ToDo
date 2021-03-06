@@ -7,7 +7,7 @@ block left-content
         if user
             - let todays = user.todos 
             each t in todays 
-                if (h.moment(t.dueDate).format("DD MMMM YYYY") === h.moment(Date.now()).format("DD MMMM YYYY"))
+                if (h.moment(t.dueDate).tz("Asia/Kolkata").format("DD MMMM YYYY") === h.moment(Date.now()).tz("Asia/Kolkata").format("DD MMMM YYYY"))
                     - todaysTask ++
 
         h4 Manage Your Account 
@@ -26,7 +26,7 @@ block left-content
         .currentTime 
             .card--container.z-depth-2
                 .card--content.white-text
-                    p.today--time.black-text #{h.moment().format('LT')}
+                    p.today--time.black-text #{h.moment().tz("Asia/Kolkata").format('LT')}
 
                     p.today--date
                         span.title--task 
@@ -36,8 +36,8 @@ block left-content
                             else 
                                 span.task.truncate= `${todaysTask} Task Today`
                         span.date--time
-                            span.date #{h.moment().format("DD")}
-                            span.month= `${h.moment().format("MMM")}, ${h.moment().format("YYYY")}`
+                            span.date #{h.moment().tz("Asia/Kolkata").format("DD")}
+                            span.month= `${h.moment().tz("Asia/Kolkata").format("MMM")}, ${h.moment().tz("Asia/Kolkata").format("YYYY")}`
 
         .thoughts
             p.random--quotes

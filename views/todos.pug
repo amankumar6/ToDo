@@ -12,7 +12,7 @@ block todos
         h5 Your Task
 
     each todo in updatedUser
-        - let dueDate  = h.moment(todo.dueDate).format("dddd DD MMMM YYYY")
+        - let dueDate  = h.moment(todo.dueDate).tz("Asia/Kolkata").format("dddd DD MMMM YYYY")
 
         if !todo.done
             .card
@@ -22,12 +22,12 @@ block todos
                             input(type="checkbox" data-value=todo._id ).todo--checkbox
                             span #{todo.task}
 
-                        if (dueDate === h.moment(Date.now()).format("dddd DD MMMM YYYY"))
+                        if (dueDate === h.moment(Date.now()).tz("Asia/Kolkata").format("dddd DD MMMM YYYY"))
                             p.due--date--time
                                 span.material-icons.red-text notifications
                                 | Today at #{todo.dueTime}
 
-                        else if (h.moment(todo.dueDate).format("YYYY MMMM DD") <= h.moment(Date.now()).format("YYYY MMMM DD"))
+                        else if (h.moment(todo.dueDate).tz("Asia/Kolkata").format("YYYY MMMM DD") <= h.moment(Date.now()).tz("Asia/Kolkata").format("YYYY MMMM DD"))
                             p.due--date--time.red-text
                                 span.material-icons notifications
                                 | Due #{dueDate}
