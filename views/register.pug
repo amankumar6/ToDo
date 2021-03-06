@@ -1,0 +1,37 @@
+extends layout 
+
+block right-content 
+    .user--form
+        .container
+            .card.blue-grey.lighten-5
+                .card-content
+                    a(href="/login").left-align.back--to--login 
+                        span.material-icons arrow_back
+                        span Back to Login
+                    form.col.s12(action="/register" method="POST") 
+                        h5.center-align REGISTER
+                        .row
+                            .input-field.col.s12
+                                input#name(type="text" name="name" required) 
+                                label(for="name") Enter a your Name
+
+                            .input-field.col.s12
+                                input#username(type="text" name="username" required) 
+                                label(for="username") Enter a username
+
+                            .input-field.col.s12
+                                input#email.validate(type="email" name="email" required) 
+                                label(for="email") Enter your Email-Id
+                                span.helper-text(data-error="We can’t quite understand that email address. Can you try again?" data-success="")
+
+                            .input-field.col.s12
+                                input#password(type="password" name="password" required) 
+                                label(for="password") Password
+
+                            .input-field.col.s12
+                                input#confirm-password(type="password" name="confirm-password" required) 
+                                label(for="confirm-password") Confirm Password
+
+                        .row.action--btn
+                            button.btn(type="submit" name="action") Register
+                                i.material-icons.right send

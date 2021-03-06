@@ -1,0 +1,28 @@
+mixin carousel()
+
+    - const sortByDate = (user.todos).sort((a, b) => (a.dueDate > b.dueDate ? 1 : -1))
+    - const groupByDate = sortByDate.reduce((item, key) => { item[key.dueDate] = [...(item[key.dueDate] || []), key]; return item;}, {})
+
+    .carousel
+        each group in groupByDate 
+            - let isDone = 0
+
+            each el in group
+                if el.done 
+                    - isDone ++
+
+            - let leftTask = group.length - isDone
+
+            if leftTask
+                a.carousel-item(href="")
+                    .row
+                        .col.s12 
+                            .card-panel.light-blue.center-align
+                                if (h.moment(group[0].dueDate).format("YYYY MMMM DD") === h.moment(Date.now()).format("YYYY MMMM DD"))
+                                    span.white-text= `You have ${leftTask} task Today`
+
+                                else if(h.moment(group[0].dueDate).format("YYYY MMMM DD") <= h.moment(Date.now()).format("YYYY MMMM DD"))
+                                    span.white-text= `You have ${leftTask} left form ${h.moment(group[0].dueDate).format('DD')}.${h.moment(group[0].dueDate).format('MM')}.${h.moment(group[0].dueDate).format('YY')}`
+
+                                else
+                                    span.white-text= `You have ${leftTask} task on ${h.moment(group[0].dueDate).format('DD')}.${h.moment(group[0].dueDate).format('MM')}.${h.moment(group[0].dueDate).format('YY')}`

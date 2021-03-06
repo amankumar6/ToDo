@@ -1,0 +1,194 @@
+.main
+    @include flex(flex-start,flex-start)
+
+    .left--block
+        background: #eceff1
+        width: 35%
+        @include flex(space-between,stretch)
+        flex-direction: column
+
+        .greetings
+            h5
+                font-family: $oxygen
+                margin: 0
+
+            .quotes
+                margin-top: 1.5rem
+                @include flex(flex-start,center)
+                flex-wrap: wrap
+                .user--avatar
+                    margin-right: 1.4rem
+                    width: 70px
+                    height: 75px
+                    img
+                        width: 70px
+                .user--quotes
+                    p
+                        font-weight: 400
+                        font-style: italic
+
+        .currentTime
+            .card--container
+                margin-top: 2.5rem
+                background: $themeColor
+                border-radius: 5px
+                .card--content
+                    @include flex(flex-start,center)
+
+                    .today--time
+                        background: white
+                        width: 35%
+                        @include flex(center,center)
+                        font-size: 30px
+
+                    .today--date
+                        width: 65%
+                        @include flex(space-between,flex-start)
+                        font-size: 20px
+
+                        span.title--task,span.date--time
+                            @include flex(flex-start,space-between)
+                            flex-direction: column
+
+                        span.title--task
+                            margin-top: 0.5rem
+
+                            span.title
+                                margin-bottom: 2rem
+
+                            span.task
+                                font-size: 12px
+
+                        span.date--time
+                            .date
+                                font-size: 40px
+                                margin-bottom: 0.3rem
+                            .month
+                                font-size: 14px
+
+                    .today--time,.today--date
+                        height: 125px
+                        padding: 0.5rem 1rem
+
+                @media screen and ( max-width: 1000px ) and (min-width: 740px)
+                    .card--content
+                        flex-direction: column
+                        .today--time
+                            height: 80px
+                        .today--time,.today--date
+                            width: 100%
+
+    .right--block
+        width: 65%
+        overflow-y: auto
+
+    .left--block,.right--block
+        padding: 1rem 2rem
+        height: calc(100vh - 51px)
+
+@media screen and ( max-width: 740px )
+    .main
+        @include flex(center,center)
+        .left--block
+            transform: translateX(-100%)
+            opacity: 0
+            z-index: 101
+            transition: transform 400ms cubic-bezier(.694, .048, .335, 1), opacity 800ms linear
+            width: 100%
+
+        .right--block
+            position: absolute
+            top: 51px
+            left: 0
+            right: 0
+            width: 100%
+
+.left--block--active
+    transform: translateX(0%) !important
+    opacity: 1 !important
+
+    &::after
+        content: ''
+        background: linear-gradient( to right, #eceff1 , $themeColor) no-repeat fixed center
+        position: absolute
+        @include pos(0, 0, auto, auto)
+        height: 100%
+        animation: navstripefade 600ms cubic-bezier(.694, .048, .335, 1) forwards
+
+@keyframes navstripefade
+    from
+        width: 100%
+
+    to
+        width: 0
+
+.noTodos
+    h4
+        margin: 0
+    @include flex(center,center)
+    height: 100%
+    border: 2px dashed #cccccc
+    border-radius: 10px
+
+// OverWriting Materializecss
+.input-field input[type=text]:focus+label,
+.input-field input[type=email]:focus+label,
+.input-field input[type=password]:focus+label,
+    color: $themeColor !important
+
+.input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus,
+.materialize-textarea:focus
+    border-bottom: 1px solid $themeColor !important
+    box-shadow: 0 1px 0 0 $themeColor !important
+
+.input-field input[type=email].valid
+    border-bottom: 1px solid $themeColor !important
+    box-shadow: 0 1px 0 0 $themeColor !important
+
+[type="checkbox"]:checked+span:not(.lever):before
+    border-top: 2px solid transparent
+    border-left: 2px solid transparent
+    border-right: 2px solid $themeColor
+    border-bottom: 2px solid $themeColor
+
+.btn
+    background: $themeColor
+
+    &:hover
+        background: rgba($themeColor,0.85)
+        -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2)
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2)
+
+    &:focus
+        background-color: $themeColor
+
+button:focus
+    background-color: $themeColor
+
+.datepicker-date-display,.timepicker-digital-display
+    background-color: $themeColor
+
+.datepicker-day-button:focus
+    background-color: rgba($themeColor,0.25)
+
+.datepicker-table
+    td.is-today
+        color: $themeColor
+    td.is-selected
+        background-color: $themeColor
+        color: #fff
+
+.confirmation-btns
+    button
+        color: $themeColor
+
+.timepicker-tick.active, .timepicker-tick:hover
+    background-color: rgba($themeColor,0.25)
+
+.timepicker-canvas line
+    stroke: $themeColor
+
+.timepicker-canvas-bg
+    fill: $themeColor

@@ -1,0 +1,57 @@
+extends layout
+
+block todos
+
+    - let count = 0
+
+    each todo in updatedUser
+        if !todo.done
+            - count ++
+
+    if(count != 0)
+        h5 Your Task
+
+    each todo in updatedUser
+        - let dueDate  = h.moment(todo.dueDate).format("dddd DD MMMM YYYY")
+
+        if !todo.done
+            .card
+                .card-content.manage--todo
+                    .todo--details
+                        label
+                            input(type="checkbox" data-value=todo._id ).todo--checkbox
+                            span #{todo.task}
+
+                        if (dueDate === h.moment(Date.now()).format("dddd DD MMMM YYYY"))
+                            p.due--date--time
+                                span.material-icons.red-text notifications
+                                | Today at #{todo.dueTime}
+
+                        else if (h.moment(todo.dueDate).format("YYYY MMMM DD") <= h.moment(Date.now()).format("YYYY MMMM DD"))
+                            p.due--date--time.red-text
+                                span.material-icons notifications
+                                | Due #{dueDate}
+
+                        else
+                            p.due--date--time
+                                span.material-icons notifications
+                                | #{dueDate}
+
+                    button.todo--delete(data-del=todo._id)
+                        span.material-icons.red-text delete
+
+    if(updatedUser.length != count)
+        h5 Completed 
+
+    each todo in updatedUser
+        if todo.done
+            .card
+                .card-content.manage--todo
+                    .todo--details
+                        label
+                            input(type="checkbox" checked data-value=todo._id ).todo--checkbox
+
+                            span #{todo.task}
+
+                    button.todo--delete(data-del=todo._id)
+                        span.material-icons.red-text delete

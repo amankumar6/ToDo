@@ -1,0 +1,79 @@
+extends layout 
+
+block left-content 
+
+    .manage--account
+        - let todaysTask = 0
+        if user
+            - let todays = user.todos 
+            each t in todays 
+                if (h.moment(t.dueDate).format("DD MMMM YYYY") === h.moment(Date.now()).format("DD MMMM YYYY"))
+                    - todaysTask ++
+
+        h4 Manage Your Account 
+
+        .account--name 
+            .user--avatar
+                if user.avatar
+                    img.circle.responsive-img(src= `/uploads/${user.avatar}` alt=user.name )
+                else
+                    img.circle.responsive-img(src=user.gravatar + '&d=retro' alt=user.name )
+
+            .user--name 
+                p.name #{user.name}
+                p.username= `@${user.username}`
+
+        .currentTime 
+            .card--container.z-depth-2
+                .card--content.white-text
+                    p.today--time.black-text #{h.moment().format('LT')}
+
+                    p.today--date
+                        span.title--task 
+                            span.title Calendar 
+                            if todaysTask === 0
+                                span.task.truncate No Task Today
+                            else 
+                                span.task.truncate= `${todaysTask} Task Today`
+                        span.date--time
+                            span.date #{h.moment().format("DD")}
+                            span.month= `${h.moment().format("MMM")}, ${h.moment().format("YYYY")}`
+
+        .thoughts
+            p.random--quotes
+            p.author.right-align
+
+block right-content 
+    .user--form
+        .container
+            .container
+                .card.blue-grey.lighten-5
+                    .card-content
+                        form.col.s12(action="/account" method="POST" enctype ="multipart/form-data") 
+                            .row
+                                .input-field.col.s12
+                                    input#name(type="text" name="name" value=user.name required) 
+                                    label(for="name") Update Name
+
+                                .input-field.col.s12
+                                    input#username(type="text" name="username" value=user.username required) 
+                                    label(for="username") Update Username
+
+                                .input-field.col.s12
+                                    input#bio(type="text" name="bio" value=`${ user.bio || 'While there is life there is a hope!'}`) 
+                                    label(for="bio") Update Bio
+
+                                .input-field.col.s12
+                                    input#email.validate(type="email" name="email" value=user.email required) 
+                                    label(for="email") Update Email-Id
+                                    span.helper-text(data-error="We can’t quite understand that email address. Can you try again?" data-success="")
+
+                                label(for="avatar").col.s12 Change Avatar
+                                    br
+                                    br
+                                    input(type="file" name="avatar" id="avatar" accept="image/gif, image/png, image/jpeg, image/jpg")
+
+                            br
+                            .row.action--btn
+                                br
+                                button.btn(type="submit" name="action") Update

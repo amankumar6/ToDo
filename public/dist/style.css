@@ -1,2 +1,515 @@
+@import url(https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Oxygen&family=Poppins&family=Roboto&display=swap);@import url(https://use.typekit.net/fei8xjc.css);* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: muli, sans-serif; }
+
+a {
+  color: #03a9f4; }
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-10px); }
+  50% {
+    transform: translateX(10px); }
+  100% {
+    transform: translateX(0px); } }
+
+.flash {
+  background: white;
+  margin-bottom: 2rem;
+  padding: 1.2rem 2rem;
+  position: relative;
+  z-index: 100;
+  border-radius: 5px;
+  display: -ms-flexbox;
+  display: flex; }
+  .flash + .flash {
+    animation-delay: 0.55s; }
+    .flash + .flash + .flash {
+      animation-delay: 0.6s; }
+  .flash__text {
+    -ms-flex: 1;
+        flex: 1; }
+  .flash__remove {
+    background: none;
+    border: 0;
+    cursor: pointer; }
+    .flash__remove:hover {
+      color: #842029; }
+    .flash__remove:focus {
+      background: none !important; }
+  .flash p {
+    margin: 0; }
+
+.flash--success {
+  color: #0f5132;
+  background: #d1e7dd; }
+
+.flash--error {
+  color: #842029;
+  background: #f8d7da;
+  animation: slideIn forwards .1s ease-in-out 2;
+  animation-timing-function: cubic-bezier(0.01, 1.68, 0.58, 1); }
+
+pre.error {
+  padding: 5rem;
+  background: white;
+  line-height: 3;
+  white-space: pre-line; }
+
+.main {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: start;
+      align-items: flex-start; }
+  .main .left--block {
+    background: #eceff1;
+    width: 35%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+    -ms-flex-direction: column;
+        flex-direction: column; }
+    .main .left--block .greetings h5 {
+      font-family: "Oxygen", sans-serif;
+      margin: 0; }
+    .main .left--block .greetings .quotes {
+      margin-top: 1.5rem;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      .main .left--block .greetings .quotes .user--avatar {
+        margin-right: 1.4rem;
+        width: 70px;
+        height: 75px; }
+        .main .left--block .greetings .quotes .user--avatar img {
+          width: 70px; }
+      .main .left--block .greetings .quotes .user--quotes p {
+        font-weight: 400;
+        font-style: italic; }
+    .main .left--block .currentTime .card--container {
+      margin-top: 2.5rem;
+      background: #03a9f4;
+      border-radius: 5px; }
+      .main .left--block .currentTime .card--container .card--content {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+        -ms-flex-align: center;
+            align-items: center; }
+        .main .left--block .currentTime .card--container .card--content .today--time {
+          background: white;
+          width: 35%;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-pack: center;
+              justify-content: center;
+          -ms-flex-align: center;
+              align-items: center;
+          font-size: 30px; }
+        .main .left--block .currentTime .card--container .card--content .today--date {
+          width: 65%;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+          -ms-flex-align: start;
+              align-items: flex-start;
+          font-size: 20px; }
+          .main .left--block .currentTime .card--container .card--content .today--date span.title--task, .main .left--block .currentTime .card--container .card--content .today--date span.date--time {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+            -ms-flex-align: space-between;
+                align-items: space-between;
+            -ms-flex-direction: column;
+                flex-direction: column; }
+          .main .left--block .currentTime .card--container .card--content .today--date span.title--task {
+            margin-top: 0.5rem; }
+            .main .left--block .currentTime .card--container .card--content .today--date span.title--task span.title {
+              margin-bottom: 2rem; }
+            .main .left--block .currentTime .card--container .card--content .today--date span.title--task span.task {
+              font-size: 12px; }
+          .main .left--block .currentTime .card--container .card--content .today--date span.date--time .date {
+            font-size: 40px;
+            margin-bottom: 0.3rem; }
+          .main .left--block .currentTime .card--container .card--content .today--date span.date--time .month {
+            font-size: 14px; }
+        .main .left--block .currentTime .card--container .card--content .today--time, .main .left--block .currentTime .card--container .card--content .today--date {
+          height: 125px;
+          padding: 0.5rem 1rem; }
+      @media screen and (max-width: 1000px) and (min-width: 740px) {
+        .main .left--block .currentTime .card--container .card--content {
+          -ms-flex-direction: column;
+              flex-direction: column; }
+          .main .left--block .currentTime .card--container .card--content .today--time {
+            height: 80px; }
+          .main .left--block .currentTime .card--container .card--content .today--time, .main .left--block .currentTime .card--container .card--content .today--date {
+            width: 100%; } }
+  .main .right--block {
+    width: 65%;
+    overflow-y: auto; }
+  .main .left--block, .main .right--block {
+    padding: 1rem 2rem;
+    height: calc(100vh - 51px); }
+
+@media screen and (max-width: 740px) {
+  .main {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center; }
+    .main .left--block {
+      -ms-transform: translateX(-100%);
+          transform: translateX(-100%);
+      opacity: 0;
+      z-index: 101;
+      transition: transform 400ms cubic-bezier(0.694, 0.048, 0.335, 1), opacity 800ms linear;
+      width: 100%; }
+    .main .right--block {
+      position: absolute;
+      top: 51px;
+      left: 0;
+      right: 0;
+      width: 100%; } }
+
+.left--block--active {
+  -ms-transform: translateX(0%) !important;
+      transform: translateX(0%) !important;
+  opacity: 1 !important; }
+  .left--block--active::after {
+    content: '';
+    background: linear-gradient(to right, #eceff1, #03a9f4) no-repeat fixed center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    height: 100%;
+    animation: navstripefade 600ms cubic-bezier(0.694, 0.048, 0.335, 1) forwards; }
+
+@keyframes navstripefade {
+  from {
+    width: 100%; }
+  to {
+    width: 0; } }
+
+.noTodos {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  height: 100%;
+  border: 2px dashed #cccccc;
+  border-radius: 10px; }
+  .noTodos h4 {
+    margin: 0; }
+
+.input-field input[type=text]:focus + label,
+.input-field input[type=email]:focus + label,
+.input-field input[type=password]:focus + label {
+  color: #03a9f4 !important; }
+
+.input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus,
+.materialize-textarea:focus {
+  border-bottom: 1px solid #03a9f4 !important;
+  box-shadow: 0 1px 0 0 #03a9f4 !important; }
+
+.input-field input[type=email].valid {
+  border-bottom: 1px solid #03a9f4 !important;
+  box-shadow: 0 1px 0 0 #03a9f4 !important; }
+
+[type="checkbox"]:checked + span:not(.lever):before {
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-right: 2px solid #03a9f4;
+  border-bottom: 2px solid #03a9f4; }
+
+.btn {
+  background: #03a9f4; }
+  .btn:hover {
+    background: rgba(3, 169, 244, 0.85);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2); }
+  .btn:focus {
+    background-color: #03a9f4; }
+
+button:focus {
+  background-color: #03a9f4; }
+
+.datepicker-date-display, .timepicker-digital-display {
+  background-color: #03a9f4; }
+
+.datepicker-day-button:focus {
+  background-color: rgba(3, 169, 244, 0.25); }
+
+.datepicker-table td.is-today {
+  color: #03a9f4; }
+
+.datepicker-table td.is-selected {
+  background-color: #03a9f4;
+  color: #fff; }
+
+.confirmation-btns button {
+  color: #03a9f4; }
+
+.timepicker-tick.active, .timepicker-tick:hover {
+  background-color: rgba(3, 169, 244, 0.25); }
+
+.timepicker-canvas line {
+  stroke: #03a9f4; }
+
+.timepicker-canvas-bg {
+  fill: #03a9f4; }
+
+.nav--bar {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center;
+  border-bottom: 0.5px solid #cfcfcf; }
+  .nav--bar .left--nav {
+    background: #eceff1;
+    width: 35%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: start;
+        justify-content: flex-start;
+    -ms-flex-align: center;
+        align-items: center; }
+    .nav--bar .left--nav h5 {
+      margin: 0; }
+  .nav--bar .right--nav {
+    width: 65%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
+    -ms-flex-align: center;
+        align-items: center; }
+    .nav--bar .right--nav h6 {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+      -ms-flex-align: center;
+          align-items: center;
+      margin: 0; }
+      .nav--bar .right--nav h6 a.manage--account {
+        margin-right: 1rem;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+        -ms-flex-align: center;
+            align-items: center; }
+        .nav--bar .right--nav h6 a.manage--account span:last-child {
+          font-family: "Roboto", sans-serif; }
+      .nav--bar .right--nav h6 a.valign-wrapper.center-align {
+        border: 1px solid #03a9f4;
+        padding: 10px 10px;
+        border-radius: 10px;
+        transition: all 200ms ease;
+        word-spacing: 0.1px; }
+        .nav--bar .right--nav h6 a.valign-wrapper.center-align span {
+          -ms-transform: translateY(-0.5px);
+              transform: translateY(-0.5px);
+          font-family: "Roboto", sans-serif; }
+        .nav--bar .right--nav h6 a.valign-wrapper.center-align:hover {
+          background: #03a9f4;
+          color: white; }
+      @media screen and (max-width: 400px) {
+        .nav--bar .right--nav h6 a.valign-wrapper.center-align {
+          padding: 3px 4px;
+          border-radius: 5px; } }
+  .nav--bar .left--nav, .nav--bar .right--nav {
+    height: 50px;
+    padding: 0 2rem; }
+  @media screen and (max-width: 550px) {
+    .nav--bar .left--nav, .nav--bar .right--nav {
+      padding: 0 1rem; } }
+
+.hamBurger {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: start;
+      align-items: flex-start;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  display: none;
+  cursor: pointer;
+  width: 35px; }
+  .hamBurger div {
+    height: 2px;
+    border-radius: 1px;
+    background-color: #03a9f4;
+    margin: 2.5px 0;
+    transition: all 300ms ease-in; }
+  .hamBurger .line1 {
+    width: 30px; }
+  .hamBurger .line2 {
+    width: 20px; }
+  .hamBurger .line3 {
+    width: 10px; }
+
+.toggleCancel .line1 {
+  width: 20px;
+  -ms-transform: rotate(-405deg) translate(-5px, 5px);
+      transform: rotate(-405deg) translate(-5px, 5px); }
+
+.toggleCancel .line2 {
+  opacity: 0; }
+
+.toggleCancel .line3 {
+  width: 20px;
+  -ms-transform: rotate(405deg) translate(-5px, -5px);
+      transform: rotate(405deg) translate(-5px, -5px); }
+
+@media screen and (max-width: 740px) {
+  .nav--bar .left--nav {
+    background: white; }
+  .hamBurger {
+    display: -ms-flexbox;
+    display: flex; } }
+
+@media screen and (max-width: 550px) {
+  .nav--bar .left--nav, .nav--bar .right--nav {
+    width: 50%; } }
+
+.user--form .row, .user--form .card {
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.user--form .extra--details {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center; }
+  .user--form .extra--details .small--text {
+    font-size: 13px;
+    text-align: right; }
+
+.user--form h5 {
+  margin: 0; }
+
+.user--form .action--btn {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
+
+.user--form .back--to--login {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center; }
+  .user--form .back--to--login .material-icons {
+    font-size: 16px; }
+
+.manage--account h4 {
+  margin: 0;
+  font-family: "Oxygen", sans-serif; }
+
+.manage--account .account--name {
+  margin-top: 1rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center; }
+  .manage--account .account--name .user--avatar {
+    margin-right: 2rem;
+    width: 100px; }
+    .manage--account .account--name .user--avatar img {
+      width: 100px; }
+  .manage--account .account--name .user--name .name {
+    font-size: 1.8rem; }
+  .manage--account .account--name .user--name .username {
+    color: gray; }
+
+.manage--account .card--container {
+  margin-top: 2rem !important; }
+
+.manage--account .thoughts {
+  margin-top: 2rem; }
+  .manage--account .thoughts p {
+    font-size: 1.4rem;
+    font-family: "Caveat", cursive; }
+  .manage--account .thoughts .author {
+    font-size: 1.2rem; }
+
+.add--todo {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1rem;
+  z-index: 100; }
+
+.modal {
+  min-height: 10%;
+  max-height: 95vh;
+  min-width: 100px;
+  max-width: 95vw; }
+
+.card-content.manage--todo {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  width: 100%; }
+  .card-content.manage--todo button.todo--delete {
+    border: none;
+    outline: none;
+    background: white;
+    cursor: pointer; }
+
+.due--date--time {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center;
+  margin: 0.5rem 0 0 -3px !important; }
+  .due--date--time span.material-icons {
+    font-size: 20px;
+    margin-right: 5px; }
+
+.carousel .carousel-item {
+  height: auto !important; }
+
+.carousel .row, .carousel .card-panel {
+  margin: 0; }
 
 /*# sourceMappingURL=style.css.map*/

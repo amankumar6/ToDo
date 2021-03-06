@@ -1,0 +1,18 @@
+include todoForm
+
+mixin addTodo()
+
+    button(data-target="modal1").btn-floating.btn.waves-effect.waves-light.modal-trigger.add--todo
+        i.material-icons add
+
+    #modal1.modal
+        form.col.s12(action="/" method="POST").add--todo--form
+            .modal-content
+                h4 Add Your Task
+                +todoForm(todo)
+            
+            .modal-footer
+                button.modal-close.waves-effect.waves-green.btn-flat.red-text(type="reset") Cancel
+
+                button.waves-effect.waves-green.btn-flat.green-text(type="submit") Save
+

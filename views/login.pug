@@ -1,0 +1,26 @@
+extends layout 
+
+block right-content 
+    .user--form
+        .container
+            .card.blue-grey.lighten-5
+                .card-content
+                    form.col.s12(action="/login" method="POST") 
+                        h5.center-align LOGIN
+                        .row
+                            .input-field.col.s12
+                                input#username(type="text" name="username") 
+                                label(for="username") Username
+                
+                            .input-field.col.s12
+                                input#password(type="password" name="password") 
+                                label(for="password") Password
+                                .extra--details 
+                                    span.small--text
+                                        a(href="/register") Register
+                                    span.small--text
+                                        a(href="/forgotPassword") Forgot Password?
+
+                        .row.action--btn
+                            button.btn.action--btn(type="submit" name="action") Login
+                                i.material-icons.right send

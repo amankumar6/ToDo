@@ -11,30 +11,48 @@ const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 const routes = require('./routes/index');
 const helpers = require('./helpers');
+const Sentry = require('@sentry/node');
+const Tracing = require('@sentry/tracing');
 const errorHandlers = require('./handlers/errorHandlers');
+require('./handlers/passport');
 
-// create our Express app
+// creating express app
 const app = express();
 
+Sentry.init({
+    dsn: process.env.DSN,
+    integrations: [
+        new Sentry.Integrations.Http({ tracing: true }),
+        new Tracing.Integrations.Express({ app }),
+    ],
+    tracesSampleRate: 1.0,
+});
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files
-app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work great too
+
+// folder were all pug files are stored
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+// sentry is for error monoitoring
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Takes the raw requests and turns them into usable properties on req.body
+// takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Exposes a bunch of methods for validating data. Used heavily on userController.validateRegister
+// exposes a bunch of methods for validating data.
 app.use(expressValidator());
 
 // populates req.cookies with any cookies that came along with the request
 app.use(cookieParser());
 
-// Sessions allow us to store data on visitors from request to request
-// This keeps users logged in and allows us to send flash messages
+// sessions allow us to store data on visitors from request to request
+// this keeps users logged in and allows us to send flash messages
 app.use(
     session({
         secret: process.env.SECRET,
@@ -45,11 +63,11 @@ app.use(
     })
 );
 
-// // Passport JS is what we use to handle our logins
+// Passport JS is used to handle logins
 app.use(passport.initialize());
 app.use(passport.session());
 
-// // The flash middleware let's us use req.flash('error', 'Shit!'), which will then pass that message to the next page the user requests
+// flash middleware let's us use req.flash('error', 'Shit!'), which will then pass that message to the next page the user requests
 app.use(flash());
 
 // pass variables to our templates + all requests
@@ -67,23 +85,25 @@ app.use((req, res, next) => {
     next();
 });
 
-// After allllll that above middleware, we finally handle our own routes!
+// after all that above middleware, we finally handle our own routes!
 app.use('/', routes);
 
-// If that above routes didnt work, we 404 them and forward to error handler
+// error monoitoring
+app.use(Sentry.Handlers.errorHandler());
+
+// if above routes didn't work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
 
-// One of our error handlers will see if these errors are just validation errors
+// Ooe of our error handlers will see if these errors are just validation errors
 app.use(errorHandlers.flashValidationErrors);
 
-// Otherwise this was a really bad error we didn't expect! Shoot eh
+// otherwise this was a really bad error we didn't expect!
 if (app.get('env') === 'development') {
-    /* Development Error Handler - Prints stack trace */
     app.use(errorHandlers.developmentErrors);
 }
 
 // production error handler
 app.use(errorHandlers.productionErrors);
 
-// done! we export it so we can start the site in start.js
+// done! exporting it so we can start the site in start.js
 module.exports = app;

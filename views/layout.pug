@@ -1,3 +1,6 @@
+include mixins/addTodo
+include mixins/carousel
+
 doctype html
 html
     head
@@ -23,39 +26,147 @@ html
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
 
         //- BootStrap CSS
-        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous")
+        //- link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous")
+
+        //- Materializecss
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 
         //- Fontawesome
-        link(rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css")
+        //- link(rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css")
+
+        //- Material Icon
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
 
         //- CSS
         link(rel='stylesheet' href='/dist/style.css')
 
         //- icon
-        link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
+        link(rel="shortcut icon" type="image/png" href="/assets/icons/icon.png")
 
         //- BootStrap JS
-        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous")
+        //- script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous")
 
-        title= `${title || 'Home'} | ${h.siteName}`
+        //- Materializecss JS
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")
+
+        //- Baffle
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/baffle.js/0.2.1/baffle.min.js")
+
+        title= `${title || 'Home'} | ToDo`
 
     body
-        block header
 
+        audio.audio(loop src="/assets/done.mp3")
 
-        //- block messages
-        //-     if locals.flashes
-        //-         .inner
-        //-             .flash-messages
-        //-                 - const categories = Object.keys(locals.flashes)
-        //-                 each category in categories
-        //-                     each message in flashes[category]
-        //-                         .flash(class=`flash--${category}`)
-        //-                             p.flash__text!= message
-        //-                             button.flash__remove(onClick="this.parentElement.remove()") &times;
-        .content
-            block content
+        .nav--bar
+            .left--nav
+                .hamBurger
+                    .line1
+                    .line2
+                    .line3
+                h5
+                    a(href="/").brand--logo ㄒㄖᗪㄖ
 
-        block scripts
-            //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
-            script(src="/dist/App.bundle.js")
+            if user
+                .right--nav
+                    h6
+                        
+                        a.manage--account(href="/account") 
+                            span.material-icons person
+                            span #{user.username}
+                        a.valign-wrapper.center-align(href="/logout") 
+                            span Sign out 
+
+        .main
+            .left--block
+                block left-content
+                    - let todaysTask = 0
+                    if user
+                        - let todays = user.todos 
+                        each t in todays 
+                            if (h.moment(t.dueDate).format("DD MMMM YYYY") === h.moment(Date.now()).format("DD MMMM YYYY"))
+                                - todaysTask ++
+
+                    div
+                        .greetings 
+                            if user 
+                                - let currentHour = h.moment().format("HH")
+                                - let name = (user.name).split(' ')[0]
+
+                                if (currentHour>=3 && currentHour<12)
+                                    h5.header= `Good Morning ${name}!`
+
+                                else if (currentHour>=12 && currentHour<15)
+                                    h5.header= `Good Afternoon ${name}!`
+
+                                else if (currentHour>=15 && currentHour<20)
+                                    h5.header= `Good Evening ${name}!`
+
+                                else 
+                                    h5.header= `Good Night ${name}!`
+
+                            else 
+                                h5.header Hey There!
+
+                            .quotes 
+                                .user--avatar
+                                    if user 
+                                        if user.avatar
+                                            img.circle.responsive-img(src=`/uploads/${user.avatar}` alt=user.name )
+                                        else
+                                            img.circle.responsive-img(src=user.gravatar + '&d=retro' alt=user.name )
+                                    else 
+                                        img.circle.responsive-img(src="http://www.ptceducation.com/wp-content/uploads/2017/10/no-user-image-square-9f6a473a32ad639f619216331d10d61ce1b35c9271d5683920960e1a5ee45bb8.jpg" alt="no user")
+
+                                .user--quotes 
+                                    p= `${ user && user.bio || 'While there is life there is a hope!'}`
+
+                        .currentTime 
+                            .card--container.z-depth-2
+                                .card--content.white-text
+                                    p.today--time.black-text= `${h.moment().format('LT')}`
+
+                                    p.today--date
+                                        span.title--task 
+                                            span.title Calendar 
+                                            if todaysTask === 0
+                                                span.task.truncate No Task Today
+                                            else 
+                                                span.task.truncate= `${todaysTask} Task Today`
+                                        span.date--time
+                                            span.date= `${h.moment().format("DD")}` 
+                                            span.month= `${h.moment().format("MMM")}, ${h.moment().format("YYYY")}`
+
+                    if user
+                        - let countDoneTodo =0
+                        each todo in user.todos 
+                            if todo.done 
+                                - countDoneTodo++
+                        if countDoneTodo!= user.todos.length
+                            +carousel()
+
+            .right--block
+                block messages
+                    if locals.flashes
+                        .inner
+                            .flash-messages
+                                - const categories = Object.keys(locals.flashes)
+                                each category in categories
+                                    each message in flashes[category]
+                                        .flash(class=`flash--${category}`).z-depth-2
+                                            p.flash__text!= message
+                                            button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+                block right-content
+
+                    +addTodo()
+                    if user.todos.length
+                        block todos
+                    else 
+                        .noTodos 
+                            h4 You don't have any task
+
+    block scripts
+        //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+        script(src="/dist/App.bundle.js")
+        script(src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js')

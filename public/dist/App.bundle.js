@@ -81,9 +81,105 @@
 
 __webpack_require__(0);
 
-console.log('hey there');
+$(document).ready(function () {
+    // baffel is for text reveal animation 
+    var text = baffle('.user--quotes p');
+    text.set({
+        characters: '▓░▒ ▒/░▒░ ▓██░ /▓░ /▒█░> ▓░▓▒ ░<▓ █░█▒ /░██',
+        speed: 60
+    });
+    text.start();
+    text.reveal(1200);
 
-// import { $, $$ } from './modules/bling';
+    // Materialize Initialization
+    $('.modal').modal();
+    $('.datepicker').datepicker();
+    $('.timepicker').timepicker();
+    $('.add--todo').click(function () {
+        return $('.add--todo--form').trigger('reset');
+    });
+    $('.carousel').carousel({
+        numVisible: 3,
+        indicators: true
+    });
+
+    // listning for change event on checkbox
+    $('.todo--checkbox').change(function () {
+        var audio = document.querySelector('.audio');
+        if (this.checked) audio.play();
+
+        // posting the checkbox status in the API
+        $.ajax({
+            url: '/todo/' + $(this).data('value'),
+            type: 'POST',
+            data: {
+                done: this.checked
+            },
+            success: setTimeout(function () {
+                return location.reload();
+            }, 200)
+        });
+    });
+
+    // listning for click event for deleting the todo 
+    $('.todo--delete').click(function () {
+        $.ajax({
+            url: '/deleteTodo/' + $(this).data('del'),
+            type: 'POST',
+            success: setTimeout(function () {
+                return location.reload();
+            }, 200)
+        });
+    });
+
+    // $('.change-theme').click(() => {
+    //     document.documentElement.style.setProperty('--bgColor', '#212425');
+    //     document.documentElement.style.setProperty('--bgColor2', '#181A1B');
+    //     document.documentElement.style.setProperty('--defaultTextColor', '#E8E6E3');
+    //     document.documentElement.style.setProperty('--borderColor', '#3E4345');
+    // });
+
+    // hamBurger eventListner 
+    $('.hamBurger').click(function () {
+        $('.hamBurger').toggleClass('toggleCancel');
+        $('.left--block').toggleClass('left--block--active');
+    });
+
+    // reloading the current time every minute 
+    setInterval(function () {
+        return $(".today--time").load(location.href + " .today--time");
+    }, 60000);
+
+    // reloading date every hour
+    setInterval(function () {
+        return $("h5.header").load(location.href + " h5.header");
+    }, 3600000);
+});
+
+// fetching random quotes from API
+$.get('https://api.quotable.io/random', function (data) {
+    $('.random--quotes').text(data.content);
+    $('.author').text('- ' + data.author);
+    var _ref = [baffle('.random--quotes'), baffle('.author')],
+        quotes = _ref[0],
+        author = _ref[1],
+        characters = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()',
+        speed = 60;
+
+    quotes.set({
+        characters: characters,
+        speed: speed
+    });
+    author.set({
+        characters: characters,
+        speed: speed
+    });
+    quotes.start();
+    author.start();
+    quotes.reveal(1000);
+    author.reveal(1000);
+    $('.thoughts').addClass('card-panel');
+});
 
 /***/ })
 /******/ ]);

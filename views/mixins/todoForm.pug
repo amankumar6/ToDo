@@ -1,0 +1,13 @@
+mixin todoForm(todo ={})
+    .row
+        .input-field.col.s12
+            input#task(type="text" name="task") 
+            label(for="task") Task
+
+        .input-field.col.s12
+            input.datepicker(type="text" name="dueDate")
+            label(for="dueDate") Due Date
+
+        .input-field.col.s12
+            input.timepicker(type="text" name="dueTime")
+            label(for="dueTime") Due Time

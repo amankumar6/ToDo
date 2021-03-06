@@ -1,4 +1,52 @@
-@import 'partials/variables';
-@import 'partials/layout';
-@import 'partials/flashes';
-@import 'partials/helpers';
+// Imported Fonts
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Oxygen&family=Poppins&family=Roboto&display=swap');
+@import url("https://use.typekit.net/fei8xjc.css");
+
+// colors
+$themeColor : #03a9f4;
+$successTxt: rgb(15, 81, 50);
+$successBg: rgb(209, 231, 221);
+$errorTxt: rgb(132, 32, 41);
+$errorBg: rgb(248, 215, 218);
+
+// fonts
+$oxygen: 'Oxygen', sans-serif;
+$roboto: 'Roboto', sans-serif;
+$poppins: 'Poppins', sans-serif;
+$caveat: 'Caveat', cursive;
+$muli: muli,sans-serif;
+
+// Mixins
+@mixin flex($justify, $align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin pos($t, $r, $b, $l) {
+    top: $t;
+    right: $r;
+    bottom: $b;
+    left: $l;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $muli;
+}
+
+a {
+    color: $themeColor;
+}
+
+@import './_flashes.sass';
+@import './_error.sass';
+@import './_layout.sass';
+@import './_navBar.sass';
+@import './_login.sass';
+@import './_account.sass';
+@import './_addTodo.sass';
+@import './_todos.sass';
+@import './_carousel.sass';
