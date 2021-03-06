@@ -45,13 +45,6 @@ $(document).ready(function () {
         });
     });
 
-    // $('.change-theme').click(() => {
-    //     document.documentElement.style.setProperty('--bgColor', '#212425');
-    //     document.documentElement.style.setProperty('--bgColor2', '#181A1B');
-    //     document.documentElement.style.setProperty('--defaultTextColor', '#E8E6E3');
-    //     document.documentElement.style.setProperty('--borderColor', '#3E4345');
-    // });
-
     // hamBurger eventListner 
     $('.hamBurger').click(() => {
         $('.hamBurger').toggleClass('toggleCancel');
