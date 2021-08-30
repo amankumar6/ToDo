@@ -16,6 +16,6 @@ Technology used in this project:-
 
 1. For Database MongoDB has used.
 
-1. For login any user Passportjs has been used.
+1. For login-in a user Passportjs has been used.
 
 1. Sentry has been used for error tracking.
